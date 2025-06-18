@@ -1,3 +1,3 @@
 POST /api/fees -> To collect fee
 GET /api/fees/1 - To view the single receipt
-GET /api/fees/student/101 -> To view all the receipts
+GET /api/fees/student/101 -> To view the fee based on the student id
