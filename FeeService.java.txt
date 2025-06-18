@@ -1,0 +1,22 @@
+@Service
+public class FeeService {
+
+    private final FeeRepository repository;
+
+    public FeeService(FeeRepository repository) {
+        this.repository = repository;
+    }
+
+    public Fee collectFee(Fee fee) {
+        fee.setPaymentDate(LocalDate.now());
+        return repository.save(fee);
+    }
+
+    public List<Fee> getFeesByStudentId(Long studentId) {
+        return repository.findByStudentId(studentId);
+    }
+   
+    public Optional<Fee> getReceiptById(Long id) {
+        return repository.findById(id);
+    }
+}

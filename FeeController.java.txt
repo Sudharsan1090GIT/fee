@@ -1,0 +1,29 @@
+@RestController
+@RequestMapping("/api/fees")
+public class FeeController {
+
+    private final FeeService service;
+
+    public FeeController(FeeService service) {
+        this.service = service;
+    }
+
+    // POST /api/fees
+    @PostMapping
+    public Fee collectFee(@RequestBody Fee fee) {
+        return service.collectFee(fee);
+    }
+
+    // GET /api/fees/student/{id}
+    @GetMapping("/student/{id}")
+    public List<Fee> getFeesByStudentId(@PathVariable Long id) {
+        return service.getFeesByStudentId(id);
+    }
+
+    @GetMapping("/{receiptId}")
+    public ResponseEntity<Fee> getReceiptById(@PathVariable Long receiptId) {
+        return service.getReceiptById(receiptId)
+                      .map(ResponseEntity::ok)
+                      .orElse(ResponseEntity.notFound().build());
+    }
+}
